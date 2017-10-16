@@ -57,7 +57,20 @@ def lambda_handler(event, context):
     }
   }
 
-  if intent == 'BalanceChecker':
+  if intent == 'AdviceIntent':
+    response['dialogAction']['message']['content'] = "We just noticed that most of the people of your age in your area avoid paying interest on purchases. AND YOU ARE STILL PAYING?!"
+  elif intent == "GreetingIntent":
+    response['dialogAction']['message']['content'] = "Hello"
+    response['dialogAction']['responseCard'] = {'version': '0',
+                                                'contentType': 'application/vnd.amazonaws.card.generic',
+                                                'genericAttachments': [
+                                                  {
+                                                    'title': 'I am Alda, how can I help?',
+                                                    'imageUrl': 'http://pngimg.com/uploads/hello/hello_PNG22.png'
+                                                  }
+                                                ]
+                                              }
+  elif intent == 'BalanceChecker':
     res = BalanceChecker()
     response['dialogAction']['message']['content'] = "Your balance is: {}€.".format(res)
   elif intent == "FinanceDefinitions":
